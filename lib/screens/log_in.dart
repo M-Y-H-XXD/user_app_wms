@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wms/constants_components/enter_way.dart';
 import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/mywigets/email_field.dart';
 import 'package:wms/mywigets/my_home_page.dart';
@@ -31,11 +32,11 @@ class _LogInState extends State<LogIn> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 30),
-                  child: EmailField(),
+                  child: EmailField(enterType: EnterWay.logIn),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: PhoneField(),
+                  child: PhoneField(enterType: EnterWay.logIn),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
@@ -52,6 +53,7 @@ class _LogInState extends State<LogIn> {
                     ),
                     minWidth: double.infinity,
                     onPressed: () {
+                      formState.currentState!.save();
                       if (formState.currentState!.validate()) {
                         formState.currentState!.save();
                         Navigator.pushReplacement(

@@ -105,6 +105,13 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
                       Icons.exit_to_app_outlined,
                       color: Theme.of(context).primaryColorLight,
                     ),
+                    title: Text(
+                      S.of(context).language,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                      ),
+                    ),
+                    tileColor: Theme.of(context).primaryColor,
                   ),
                 ),
               ],

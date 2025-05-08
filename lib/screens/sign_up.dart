@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wms/constants_components/enter_way.dart';
 import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/mywigets/birth_day_field.dart';
 import 'package:wms/mywigets/email_field.dart';
@@ -76,11 +77,11 @@ class _SignUpState extends State<SignUp> {
 
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: EmailField(),
+                  child: EmailField(enterType: EnterWay.sinUp),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: PhoneField(),
+                  child: PhoneField(enterType: EnterWay.sinUp),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),

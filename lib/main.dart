@@ -57,20 +57,20 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: ConstantColors.ScaffoldBackgroundColorLight,
       ),
 
-      darkTheme: //ThemeData.dark()
-          ThemeData(
-        fontFamily: 'CascadiaMono',
+      darkTheme: ThemeData.dark(),
+      //     ThemeData(
+      //   fontFamily: 'CascadiaMono',
 
-        primaryColor: Colors.blueGrey,
-        primaryColorDark: ConstantColors.DrawerBackgroundColorDark,
-        primaryColorLight: Colors.white,
-        //cardColor: Colors.black,
-        // listTileTheme: ListTileThemeData(
-        //   tileColor: Colors.black,
-        // ),
-        appBarTheme: const AppBarTheme(color: ConstantColors.appBarColorDark),
-        scaffoldBackgroundColor: ConstantColors.ScaffoldBackgroundColorDark,
-      ),
+      //   primaryColor: Colors.blueGrey,
+      //   primaryColorDark: ConstantColors.DrawerBackgroundColorDark,
+      //   primaryColorLight: Colors.white,
+      //   //cardColor: Colors.black,
+      //   // listTileTheme: ListTileThemeData(
+      //   //   tileColor: Colors.black,
+      //   // ),
+      //   appBarTheme: const AppBarTheme(color: ConstantColors.appBarColorDark),
+      //   scaffoldBackgroundColor: ConstantColors.ScaffoldBackgroundColorDark,
+      // ),
       themeMode:
           (context.watch<ThemeModeProvider>().isDark == true)
               ? ThemeMode.dark

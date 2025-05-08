@@ -1,0 +1,1 @@
+enum EnterWay { logIn, sinUp }

@@ -1,4 +1,5 @@
 {
     "language":"language",
-    "sign_out":"sign_out"
+    "sign_out":"sign_out",
+    "choose_language":"choose language"
 }

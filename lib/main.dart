@@ -57,7 +57,10 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: ConstantColors.ScaffoldBackgroundColorLight,
       ),
 
-      darkTheme: ThemeData.dark(),
+      // darkTheme: ThemeData.dark().copyWith(),
+      darkTheme: ThemeData.dark().copyWith(
+        textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'CascadiaMono'),
+      ),
       //     ThemeData(
       //   fontFamily: 'CascadiaMono',
 

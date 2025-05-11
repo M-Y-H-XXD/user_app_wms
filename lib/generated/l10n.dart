@@ -59,6 +59,21 @@ class S {
   String get language {
     return Intl.message('language', name: 'language', desc: '', args: []);
   }
+
+  /// `sign_out`
+  String get sign_out {
+    return Intl.message('sign_out', name: 'sign_out', desc: '', args: []);
+  }
+
+  /// `choose language`
+  String get choose_language {
+    return Intl.message(
+      'choose language',
+      name: 'choose_language',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

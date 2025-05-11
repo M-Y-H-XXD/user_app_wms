@@ -7,7 +7,7 @@ class ConstantColors {
   );
   static const Color backgroundColorTabBarIndicatorSelected = Color(0xFFd1f068);
 
-  static const Color appBarColorLight = Colors.blue;
+  static const Color appBarColorLight = Color(0xFF169976);
   static const Color appBarColorDark = Colors.grey;
 
   static const Color ScaffoldBackgroundColorLight = Color.fromARGB(
@@ -20,6 +20,6 @@ class ConstantColors {
 
   static const Color DrawerBackgroundColorDark = Color(0xFF1d2733);
 
-  static const Color CurvedNavigationBarBackground = Color(0xFFF1EFEC);
-  static const Color CurvedNavigationBarColor = Color(0xFFD4C9BE);
+  static const Color CurvedNavigationBarBackground = Color(0xFF006A71);
+  static const Color CurvedNavigationBarColor = Color(0xFF169976);
 }

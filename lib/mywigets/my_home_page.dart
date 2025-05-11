@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:wms/generated/l10n.dart';
 import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/mywigets/custom_search.dart';
 import 'package:wms/mywigets/drawer_of_home.dart';
@@ -25,7 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        //  title: RichText(),
+        //RichText()
+        title: Text(S.of(context).choose_language),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),

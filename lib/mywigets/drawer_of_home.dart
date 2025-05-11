@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wms/generated/l10n.dart';
 import 'package:wms/providers/language_provider.dart';
 import 'package:wms/providers/theme_mode_provider.dart';
+import 'package:wms/screens/choose_language.dart';
+import 'package:wms/screens/register.dart';
 
 class DrawerOfHome extends StatefulWidget {
   const DrawerOfHome({super.key});
@@ -77,7 +78,6 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
             child: Column(
               children: [
                 Card(
-                  // color: Theme.of(context).cardColor,
                   child: ListTile(
                     leading: Icon(
                       Icons.language,
@@ -91,11 +91,12 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
                     ),
                     tileColor: Theme.of(context).primaryColor,
                     onTap: () {
-                      language = Intl.getCurrentLocale();
-                      (language == 'en') ? language = 'ar' : language = 'en';
-
-                      var providerLanguage = context.read<LanguageProvider>();
-                      providerLanguage.changeLanguage(newLanguage: language);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChooseLanguage(),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -106,12 +107,25 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
                       color: Theme.of(context).primaryColorLight,
                     ),
                     title: Text(
-                      S.of(context).language,
+                      S.of(context).sign_out,
                       style: TextStyle(
                         color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                     tileColor: Theme.of(context).primaryColor,
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Register(),
+                        ),
+                        (route) => false,
+                      );
+                      var providerThemeMode = context.read<ThemeModeProvider>();
+                      providerThemeMode.changeThemeMode(newIsDark: false);
+                      var providerLanguage = context.read<LanguageProvider>();
+                      providerLanguage.changeLanguage(newLanguage: 'en');
+                    },
                   ),
                 ),
               ],

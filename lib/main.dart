@@ -49,6 +49,11 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.white70,
         primaryColorDark: Colors.white,
         primaryColorLight: Colors.black,
+        searchBarTheme: SearchBarThemeData(
+          backgroundColor: WidgetStateProperty.all(
+            ConstantColors.appBarColorLight,
+          ),
+        ),
         //cardColor: Colors.white,
         // listTileTheme: ListTileThemeData(
         //   tileColor: Colors.white,

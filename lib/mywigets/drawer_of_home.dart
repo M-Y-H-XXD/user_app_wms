@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wms/apis/log_out_user.dart';
 import 'package:wms/generated/l10n.dart';
+import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/providers/language_provider.dart';
 import 'package:wms/providers/theme_mode_provider.dart';
 import 'package:wms/screens/choose_language.dart';
@@ -17,6 +20,14 @@ class DrawerOfHome extends StatefulWidget {
 class _DrawerOfHomeState extends State<DrawerOfHome> {
   late bool isDark;
   late String language;
+  LogOutUser logOutUserAccount = LogOutUser();
+  final storage = const FlutterSecureStorage();
+  Future<void> _saveSecureValue({
+    required String key,
+    required String? value,
+  }) async {
+    await storage.write(key: key, value: value);
+  }
 
   Future<bool?> _getValue(String key) async {
     final prefs = await SharedPreferences.getInstance();
@@ -113,7 +124,16 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
                       ),
                     ),
                     tileColor: Theme.of(context).primaryColor,
-                    onTap: () {
+                    onTap: () async {
+                      logOutUserAccount.logOutUser();
+                      await _saveSecureValue(key: 'token', value: null);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('signed out successfully'),
+                          backgroundColor:
+                              ConstantColors.backgroundOfSnackBarRight,
+                        ),
+                      );
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

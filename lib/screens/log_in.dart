@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:wms/apis/log_in_user.dart';
 import 'package:wms/constants_components/enter_way.dart';
 import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/mywigets/email_field.dart';
@@ -17,6 +21,7 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  LogInUser logInUserAccount = LogInUser();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,16 +57,37 @@ class _LogInState extends State<LogIn> {
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
                     minWidth: double.infinity,
-                    onPressed: () {
-                      formState.currentState!.save();
+                    onPressed: () async {
+                      formState.currentState!
+                          .save(); //this for make phone number and email is optional in log in screen (entry type)
                       if (formState.currentState!.validate()) {
                         formState.currentState!.save();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MyHomePage(),
-                          ),
-                        );
+                        Response response = await logInUserAccount.logInUser();
+                        var data = jsonDecode(response.body);
+                        if (response.statusCode == 200 ||
+                            response.statusCode == 201) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${data['msg']}'),
+                              backgroundColor:
+                                  ConstantColors.backgroundOfSnackBarRight,
+                            ),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyHomePage(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${data['msg']}'),
+                              backgroundColor:
+                                  ConstantColors.backgroundOfSnackBarFalse,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: const Text(

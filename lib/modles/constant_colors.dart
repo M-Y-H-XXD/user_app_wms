@@ -24,4 +24,11 @@ class ConstantColors {
   static const Color CurvedNavigationBarColor = Color(0xFF169976);
 
   static const Color underLineBorderAppBarCustomSearch = Colors.indigo;
+  static const Color backgroundOfSnackBarRight = Color.fromARGB(
+    255,
+    7,
+    147,
+    12,
+  );
+  static const Color backgroundOfSnackBarFalse = Colors.red;
 }

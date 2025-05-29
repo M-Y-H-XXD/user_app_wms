@@ -60,9 +60,9 @@ class S {
     return Intl.message('language', name: 'language', desc: '', args: []);
   }
 
-  /// `sign_out`
+  /// `log out`
   String get sign_out {
-    return Intl.message('sign_out', name: 'sign_out', desc: '', args: []);
+    return Intl.message('log out', name: 'sign_out', desc: '', args: []);
   }
 
   /// `choose language`

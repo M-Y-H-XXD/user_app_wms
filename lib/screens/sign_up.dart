@@ -1,14 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:wms/apis/register_user.dart';
 import 'package:wms/constants_components/enter_way.dart';
 import 'package:wms/modles/constant_colors.dart';
-import 'package:wms/mywigets/birth_day_field.dart';
 import 'package:wms/mywigets/email_field.dart';
 import 'package:wms/mywigets/my_home_page.dart';
-import 'package:wms/mywigets/name_field.dart';
 import 'package:wms/mywigets/password_field.dart';
 import 'package:wms/mywigets/phone_field.dart';
-import 'package:wms/mywigets/pick_image_and_show_it.dart';
-import 'package:wms/static_classes/user_informations.dart';
+import 'package:wms/mywigets/set_password_field.dart';
 
 GlobalKey<FormState> formState = GlobalKey();
 GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
@@ -21,6 +22,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  RegisterUser register = RegisterUser();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,48 +35,47 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 30),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: NameField(label: 'First Name'),
-                        ),
-                      ),
+                // const Padding(
+                //   padding: EdgeInsets.only(top: 30),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         child: Padding(
+                //           padding: EdgeInsets.only(right: 20),
+                //           child: NameField(label: 'First Name'),
+                //         ),
+                //       ),
 
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: NameField(label: 'Last Name'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                //       Expanded(
+                //         child: Padding(
+                //           padding: EdgeInsets.only(left: 10),
+                //           child: NameField(label: 'Last Name'),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
-                const Padding(
-                  padding: EdgeInsets.only(top: 30),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: NameField(label: 'Location'),
-                        ),
-                      ),
+                // const Padding(
+                //   padding: EdgeInsets.only(top: 30),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         child: Padding(
+                //           padding: EdgeInsets.only(right: 20),
+                //           child: NameField(label: 'Location'),
+                //         ),
+                //       ),
 
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: BirthDayField(label: 'Birth Day'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
+                //       Expanded(
+                //         child: Padding(
+                //           padding: EdgeInsets.only(left: 10),
+                //           child: BirthDayField(label: 'Birth Day'),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: EmailField(enterType: EnterWay.sinUp),
@@ -87,10 +88,14 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: PasswordField(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: PickImageAndShowIt(scaffoldState: scaffoldState),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: SetPasswordField(),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.all(12),
+                //   child: PickImageAndShowIt(scaffoldState: scaffoldState),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: MaterialButton(
@@ -101,17 +106,36 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
                     minWidth: double.infinity,
-                    onPressed: () {
-                      formState.currentState!.save();
-                      if (formState.currentState!.validate() &&
-                          UserInformations.image != null) {
+                    onPressed: () async {
+                      formState.currentState!.save(); //this for set password
+                      if (formState.currentState!.validate()) {
                         formState.currentState!.save();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MyHomePage(),
-                          ),
-                        );
+                        Response response = await register.registerUser();
+                        var data = jsonDecode(response.body);
+                        if (response.statusCode == 200 ||
+                            response.statusCode == 201) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${data['msg']}'),
+                              backgroundColor:
+                                  ConstantColors.backgroundOfSnackBarRight,
+                            ),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyHomePage(),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${data['msg']}'),
+                              backgroundColor:
+                                  ConstantColors.backgroundOfSnackBarFalse,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: const Text(

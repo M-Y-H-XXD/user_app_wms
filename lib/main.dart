@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:wms/generated/l10n.dart';
 import 'package:wms/modles/constant_colors.dart';
-// import 'package:wms/mywigets/my_home_page.dart';
-
+import 'package:wms/mywigets/my_home_page.dart';
 import 'package:wms/providers/language_provider.dart';
 import 'package:wms/providers/theme_mode_provider.dart';
 import 'package:wms/screens/register.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final storage = const FlutterSecureStorage();
+  final String? isRegistered = await storage.read(key: 'token');
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageProvider()),
         ChangeNotifierProvider(create: (context) => ThemeModeProvider()),
       ],
-      child: const MyApp(),
+      child: MyApp(isRegistered: isRegistered != null),
     ),
   );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool isRegistered;
+
+  const MyApp({super.key, required this.isRegistered});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -83,8 +88,7 @@ class _MyAppState extends State<MyApp> {
           (context.watch<ThemeModeProvider>().isDark == true)
               ? ThemeMode.dark
               : ThemeMode.light,
-      home: const Register(),
-      //const MyHomePage(),
+      home: (widget.isRegistered) ? const MyHomePage() : const Register(),
     );
   }
 }

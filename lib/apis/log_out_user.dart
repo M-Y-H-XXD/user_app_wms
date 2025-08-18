@@ -17,7 +17,7 @@ class LogOutUser {
         'Authorization': 'Bearer $token',
       },
     );
-    if (response.statusCode == 200 || response.statusCode == 201) {
+    if (response.statusCode == 202 || response.statusCode == 201) {
       print('log out done successfully \n body=${response.body}');
     } else {
       print(

@@ -31,4 +31,5 @@ class ConstantColors {
     12,
   );
   static const Color backgroundOfSnackBarFalse = Colors.red;
+  static const Color backgroundOfStatefulBuilder = Color(0x00fff000);
 }

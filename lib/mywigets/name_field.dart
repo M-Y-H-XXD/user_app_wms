@@ -36,7 +36,9 @@ class NameField extends StatelessWidget {
             ? UserInformations.userName = value
             : (label == 'Last Name')
             ? UserInformations.lastName = value
-            : (label == 'Location')
+            : (label == 'Location' ||
+                label == 'location' ||
+                label == 'الموقع') //location
             ? UserInformations.location = value
             : null;
       },

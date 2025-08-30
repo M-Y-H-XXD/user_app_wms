@@ -26,7 +26,7 @@ class LogInUser {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(requestData),
     );
-    if (response.statusCode == 200 || response.statusCode == 201) {
+    if (response.statusCode == 202 || response.statusCode == 201) {
       var data = jsonDecode(response.body);
       await saveSecureValue(key: 'token', value: data['token']);
       print('log in done successfully \n body=${response.body}');

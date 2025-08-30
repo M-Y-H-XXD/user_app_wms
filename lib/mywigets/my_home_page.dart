@@ -2,11 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:wms/generated/l10n.dart';
 import 'package:wms/modles/constant_colors.dart';
-import 'package:wms/mywigets/custom_search.dart';
 import 'package:wms/mywigets/drawer_of_home.dart';
-import 'package:wms/screens/cart.dart';
 import 'package:wms/screens/home.dart';
-import 'package:wms/screens/me.dart';
+import 'package:wms/screens/invoice.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -18,7 +16,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _page = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-  List<Widget> listWidget = [const Home(), const Cart(), const Me()];
+  List<Widget> listWidget = [const Home(), const Invoice()];
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +25,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: true,
         //RichText()
-        title: Text(S.of(context).choose_language),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: CustomSearch());
-              },
-              icon: const Icon(Icons.search, size: 35),
-            ),
-          ),
-        ],
+        title: Text(S.of(context).market),
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 8),
+        //     child: IconButton(
+        //       onPressed: () {
+        //         showSearch(context: context, delegate: CustomSearch());
+        //       },
+        //       icon: const Icon(Icons.search, size: 35),
+        //     ),
+        //   ),
+        // ],
       ),
       drawer: const DrawerOfHome(),
 
@@ -48,17 +46,17 @@ class _MyHomePageState extends State<MyHomePage> {
         color: ConstantColors.CurvedNavigationBarColor,
         items: <Widget>[
           Icon(
-            Icons.home,
+            Icons.home_outlined,
             size: size.width / 12,
             color: Theme.of(context).primaryColor,
           ),
+          // Icon(
+          //   Icons.shopping_cart_outlined,
+          //   size: size.width / 12,
+          //   color: Theme.of(context).primaryColor,
+          // ),
           Icon(
-            Icons.shopping_cart_outlined,
-            size: size.width / 12,
-            color: Theme.of(context).primaryColor,
-          ),
-          Icon(
-            Icons.person_2_outlined,
+            Icons.receipt_long_outlined,
             size: size.width / 12,
             color: Theme.of(context).primaryColor,
           ),

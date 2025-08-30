@@ -20,6 +20,9 @@ class RegisterUser {
       'email': UserInformations.email,
       'password': UserInformations.password,
       'phone_number': UserInformations.phoneNumber,
+      'name': UserInformations.userName,
+      'last_name': UserInformations.lastName,
+      'location': UserInformations.location,
     };
     var response = await post(
       url,

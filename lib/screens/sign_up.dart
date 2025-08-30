@@ -7,6 +7,7 @@ import 'package:wms/constants_components/enter_way.dart';
 import 'package:wms/modles/constant_colors.dart';
 import 'package:wms/mywigets/email_field.dart';
 import 'package:wms/mywigets/my_home_page.dart';
+import 'package:wms/mywigets/name_field.dart';
 import 'package:wms/mywigets/password_field.dart';
 import 'package:wms/mywigets/phone_field.dart';
 import 'package:wms/mywigets/set_password_field.dart';
@@ -35,37 +36,31 @@ class _SignUpState extends State<SignUp> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                // const Padding(
-                //   padding: EdgeInsets.only(top: 30),
-                //   child: Row(
-                //     children: [
-                //       Expanded(
-                //         child: Padding(
-                //           padding: EdgeInsets.only(right: 20),
-                //           child: NameField(label: 'First Name'),
-                //         ),
-                //       ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: NameField(label: 'First Name'),
+                        ),
+                      ),
 
-                //       Expanded(
-                //         child: Padding(
-                //           padding: EdgeInsets.only(left: 10),
-                //           child: NameField(label: 'Last Name'),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: NameField(label: 'Last Name'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
 
-                // const Padding(
-                //   padding: EdgeInsets.only(top: 30),
-                //   child: Row(
-                //     children: [
-                //       Expanded(
-                //         child: Padding(
-                //           padding: EdgeInsets.only(right: 20),
-                //           child: NameField(label: 'Location'),
-                //         ),
-                //       ),
+                const Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: NameField(label: 'Location'),
+                ),
 
                 //       Expanded(
                 //         child: Padding(

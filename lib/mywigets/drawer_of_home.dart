@@ -148,6 +148,34 @@ class _DrawerOfHomeState extends State<DrawerOfHome> {
                     },
                   ),
                 ),
+                // Card(
+                //   child: ListTile(
+                //     leading: Icon(
+                //       Icons.star,
+                //       color: Theme.of(context).primaryColorLight,
+                //     ),
+                //     title: Text(
+                //       'click me',
+                //       style: TextStyle(
+                //         color: Theme.of(context).primaryColorLight,
+                //       ),
+                //     ),
+                //     tileColor: Theme.of(context).primaryColor,
+                //     onTap: () async {
+                //       // Updateuser s = Updateuser();
+                //       // await s.updateuserMethod(
+                //       //   password: '123456789',
+                //       //   name: 'yazan',
+                //       //   lastName: 'hus',
+                //       //   loacation: 'syr',
+                //       // );
+
+                //       // print(
+                //       //   'objectttttttttt++++t=${UpdateuserData.updateuserMap}',
+                //       // );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),

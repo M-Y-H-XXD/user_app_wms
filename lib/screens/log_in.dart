@@ -62,9 +62,10 @@ class _LogInState extends State<LogIn> {
                           .save(); //this for make phone number and email is optional in log in screen (entry type)
                       if (formState.currentState!.validate()) {
                         formState.currentState!.save();
+
                         Response response = await logInUserAccount.logInUser();
                         var data = jsonDecode(response.body);
-                        if (response.statusCode == 200 ||
+                        if (response.statusCode == 202 ||
                             response.statusCode == 201) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

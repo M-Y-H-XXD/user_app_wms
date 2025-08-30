@@ -1,50 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:wms/apis/show_products_in_centers.dart';
+import 'package:wms/apis/show_products_of_distribution_center.dart';
 import 'package:wms/generated/l10n.dart';
-import 'package:wms/screens/map_screen.dart';
-import 'package:wms/static_classes/show_products_in_centers_data.dart';
+import 'package:wms/screens/product_details.dart';
+import 'package:wms/static_classes/show_products_of_distribution_center_data.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
+class ProductsOfDistributionCenter extends StatefulWidget {
+  ProductsOfDistributionCenter({super.key, required this.distributionCenterId});
+  int distributionCenterId;
   @override
-  State<Home> createState() => _HomeState();
+  State<ProductsOfDistributionCenter> createState() =>
+      _ProductsOfDistributionCenterState();
 }
 
-class _HomeState extends State<Home> {
-  bool isload = false;
+class _ProductsOfDistributionCenterState
+    extends State<ProductsOfDistributionCenter> {
   double fontSize = 30;
-  Map<dynamic, dynamic> productsMap = {};
-  List<dynamic> productsList = [];
+  bool isload = true;
+  Map productsMap = {};
+  List productsList = [];
+  void moveToProductDetails({
+    required BuildContext context,
+    required var item,
+    required int distributionCenterId,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => ProductDetails(
+              item: item,
+              destributionCenterID: distributionCenterId,
+            ),
+      ),
+    );
+  }
+
   Future<void> fetchData() async {
-    ShowProductsInCenters showProductsInCenters = ShowProductsInCenters();
-    await showProductsInCenters.showProductsInCentersMethod();
-    productsMap.addAll(ShowProductsInCentersData.showProductsInCentersMap);
+    ShowProductsOfDistributionCenter showProductsOfDistributionCenter =
+        ShowProductsOfDistributionCenter();
+    await showProductsOfDistributionCenter
+        .showProductsOfDistributionCenterMethod(
+          distributionCenterId: widget.distributionCenterId,
+        );
+    productsMap.addAll(
+      ShowProductsOfDistributionCenterData.showProductsOfDistributionCenterMap,
+    );
+    productsList.addAll(productsMap['products']);
   }
 
   void check() async {
     await fetchData();
-    if (productsMap.isNotEmpty) {
-      productsList.addAll(productsMap['products']);
-      isload = true;
-      if (!mounted) return; //// تأكد أن الـ widget مازال موجود
-      setState(() {});
-    }
-  }
-
-  void moveToCenters({required BuildContext context, required var item}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MapScreen(productID: item['id']),
-
-        // DistributionCentersSorted(
-        //   productID: item['id'],
-        //   latitude: latitude,
-        //   longitude: longitude,
-        // ),
-      ),
-    );
+    isload = false;
+    setState(() {});
   }
 
   @override
@@ -58,8 +65,12 @@ class _HomeState extends State<Home> {
     Size size = MediaQuery.of(context).size;
     fontSize = size.width / 20;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(S.of(context).products_of_distribution_center),
+      ),
       body:
-          (!isload)
+          (isload)
               ? const Center(
                 child: CircularProgressIndicator(color: Colors.blue),
               )
@@ -72,12 +83,16 @@ class _HomeState extends State<Home> {
                     crossAxisSpacing: 3,
                     mainAxisSpacing: 3,
                   ),
-
                   itemCount: productsList.length,
                   itemBuilder: (context, index) {
-                    Map item = productsList[index];
+                    var item = productsList[index];
                     return InkWell(
-                      onTap: () => moveToCenters(context: context, item: item),
+                      onTap:
+                          () => moveToProductDetails(
+                            context: context,
+                            item: item,
+                            distributionCenterId: widget.distributionCenterId,
+                          ),
                       child: Card(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
